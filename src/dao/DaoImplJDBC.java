@@ -6,8 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import model.Employee;
+import model.Product;
 
 public class DaoImplJDBC implements Dao {
 	Connection connection;
@@ -36,7 +38,7 @@ public class DaoImplJDBC implements Dao {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}				
 		}
 		
 	}
@@ -61,5 +63,18 @@ public class DaoImplJDBC implements Dao {
 		}
     	return employee;
 	}
+
+	@Override
+	public ArrayList<Product> getInventory() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean writeInventory(ArrayList<Product> productos) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 
 }

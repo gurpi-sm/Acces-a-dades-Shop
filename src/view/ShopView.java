@@ -11,6 +11,7 @@ import utils.Constants;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JDialog;
 
 import java.awt.Font;
@@ -26,6 +27,7 @@ public class ShopView extends JFrame implements ActionListener, KeyListener{
 	private Shop shop;
 	
 	private JPanel contentPane;
+	private JButton btninventory;
 	private JButton btnShowCash;
 	private JButton btnAddProduct;
 	private JButton btnAddStock;
@@ -85,6 +87,14 @@ public class ShopView extends JFrame implements ActionListener, KeyListener{
 		lblShowCash.setBounds(57, 20, 236, 14);
 		contentPane.add(lblShowCash);
 		
+		btninventory = new JButton("0. Exportar inventario");
+		btninventory.setHorizontalAlignment(SwingConstants.LEFT);
+		btninventory.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btninventory.setBounds(99, 40, 236, 40);
+		contentPane.add(btninventory);
+		// listen button
+		btninventory.addActionListener(this);
+		
 		// option count cash
 		btnShowCash = new JButton("1. Contar caja");
 		btnShowCash.setHorizontalAlignment(SwingConstants.LEFT);
@@ -132,6 +142,10 @@ public class ShopView extends JFrame implements ActionListener, KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		
+		if (e.getKeyChar() == '0' ) {
+			this.inventory();	
+        }
 		if (e.getKeyChar() == '1' ) {
 			this.openCashView();	
         }
@@ -156,6 +170,10 @@ public class ShopView extends JFrame implements ActionListener, KeyListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		
+		if (e.getSource() == btninventory) {
+			this.inventory();						
+		}
 		if (e.getSource() == btnShowCash) {
 			this.openCashView();						
 		}
@@ -196,6 +214,29 @@ public class ShopView extends JFrame implements ActionListener, KeyListener{
         dialog.setModal(true);
         dialog.setVisible(true);
 	}
+	
+	public void inventory() {
+		
+		boolean funciona = false;	
+			funciona =	shop.writeInventory();
+		
+		if (funciona == true) {
+			JOptionPane.showMessageDialog(
+				    null,
+				    "Inventario exportado correctamente",
+				    "Información",
+				    JOptionPane.INFORMATION_MESSAGE
+				);
+		}
+		else if (funciona == false) {
+			JOptionPane.showMessageDialog(
+				    null,
+				    "Error exportando el inventario",
+				    "Error",
+				    JOptionPane.ERROR_MESSAGE
+				);
+		}
+		}
 	
 	
 }
